@@ -7,6 +7,7 @@
 //
 
 #import "RoomViewController.h"
+#import "ViewController.h"
 #define kFirechatNS @"https://spot-chat.firebaseio.com/"
 
 @interface RoomViewController ()
@@ -79,6 +80,16 @@
     //cell.detailTextLabel.text = chatMessage[@"name"];
     
     return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showChatRoom"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        ViewController *destViewController = segue.destinationViewController;
+        NSDictionary* room = [self.rooms objectAtIndex:indexPath.row];
+        destViewController.roomId = room[@"id"];
+        destViewController.roomName = room[@"roomName"];
+    }
 }
 
 /*

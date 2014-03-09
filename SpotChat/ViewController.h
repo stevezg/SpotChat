@@ -13,6 +13,8 @@
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSMutableArray* chat;
 @property (nonatomic, strong) Firebase* firebase;
+@property (nonatomic, strong) NSString* roomId;
+@property (nonatomic, strong) NSString* roomName;
 
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
