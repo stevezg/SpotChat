@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Firebase/Firebase.h>
 
 @interface RoomViewController : UITableViewController
+
+@property (nonatomic, strong) NSMutableArray* rooms;
+@property (nonatomic, strong) Firebase* firebase;
 
 @end
