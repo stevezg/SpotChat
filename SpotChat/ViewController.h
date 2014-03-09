@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSMutableArray* chat;
 @property (nonatomic, strong) Firebase* firebase;
+@property (nonatomic, strong) Firebase* messagesRef;
 @property (nonatomic, strong) NSString* roomId;
 @property (nonatomic, strong) NSString* roomName;
 

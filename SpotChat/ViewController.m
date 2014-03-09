@@ -27,14 +27,15 @@
     
     // Initialize the root of our Firebase namespace.
     self.firebase = [[Firebase alloc] initWithUrl:kFirechatNS];
+    self.messagesRef = [[Firebase alloc] init];
     Firebase* roomRef = [self.firebase childByAppendingPath:@"room-messages"];
-    Firebase* messagesRef = [roomRef childByAppendingPath:[NSString stringWithFormat:@"%i", (int)self.roomId]];
+    self.messagesRef = [roomRef childByAppendingPath:[NSString stringWithFormat:@"%@", self.roomId]];
     
     // Pick a random number between 1-1000 for our username.
     self.name = [NSString stringWithFormat:@"Guest%d", arc4random() % 1000];
     [nameField setTitle:self.roomName forState:UIControlStateNormal];
     
-    [messagesRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+    [self.messagesRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
         // Add the chat message to the array.
         [self.chat addObject:snapshot.value];
         // Reload the table view so the new message will show up.
@@ -57,7 +58,7 @@
 
     // This will also add the message to our local array self.chat because
     // the FEventTypeChildAdded event will be immediately fired.
-    [[self.firebase childByAutoId] setValue:@{@"name" : self.name, @"text": aTextField.text}];
+    [[self.messagesRef childByAutoId] setValue:@{@"name" : self.name, @"text": aTextField.text}];
 
     [aTextField setText:@""];
     return NO;
